@@ -15,6 +15,8 @@ public class Uporabnik {
     private String uporabniskoIme;
     private String email;
     
+    private String userId;
+    
     public Uporabnik(){
 
     }
@@ -65,6 +67,14 @@ public class Uporabnik {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public void setuserId(String s){
+        this.userId = s;
+    }
+
+    public String getuserId(){
+        return userId;
     }
 
     // @Override
