@@ -15,6 +15,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.HashMap;
 import java.util.Map;
 
+@CrossOrigin(origins = "*")  // Dovoli vse origins
 @RestController
 @RequestMapping("/api/auth")
 public class UsermanagmentApi {
@@ -56,8 +57,7 @@ public class UsermanagmentApi {
             
             ObjectMapper mapper = new ObjectMapper();
             JsonNode tokenResponse = mapper.readTree(response.getBody());
-            
-            // ✅ PRAVILNO: uporaba injektiranega repository-ja
+
             Uporabnik user = userRepository.findByUsername(request.username);
             System.out.println("User from DB: " + (user != null ? user.getUporabniskoIme() : "null"));
             
@@ -77,8 +77,7 @@ public class UsermanagmentApi {
         } catch (Exception e) {
             System.out.println("ERROR: " + e.getMessage());
             e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body(Map.of("error", "Invalid username or password"));
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", "Napačno uporabniško ime ali geslo"));
         }
     }
     
@@ -125,8 +124,14 @@ public class UsermanagmentApi {
                 
                 // Create user in local database
                 Uporabnik user = new Uporabnik();
-                user.setUporabniskoIme(request.getUsername());
+
                 user.setKeycloakId(keycloakId);
+                user.setUporabniskoIme(request.getUsername());
+                user.setUporabniskoIme(request.getUsername());
+                user.setemail(request.getEmail());
+                user.setlastName(request.getLastName());
+                user.setname(request.getFirstName());
+
                 userRepository.save(user);
                 
                 // Get initial token for the user

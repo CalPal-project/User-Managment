@@ -10,14 +10,15 @@ public class Uporabnik {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String ime;
-    private String priimek;
+    @Column(name = "ime")
+    private String name;
+    @Column(name = "priimek")
+    private String lastName;
 
     @Column(name = "uporabnisko_ime")
     private String username;
 
     private String email;
-    
     
     
     @Column(name = "keycloak_id", unique = true, nullable = false)
@@ -32,6 +33,16 @@ public class Uporabnik {
     
     public String getKeycloakId() { return keycloakId; }
     public void setKeycloakId(String keycloakId) { this.keycloakId = keycloakId; }
+
+    public String getname(){ return name; }
+    public void setname(String s){ this.name = s; }
+
+    public String getlastName(){ return lastName; }
+    public void setlastName(String s){ this.lastName = s; }
+
+    public String getemail(){ return email; }
+    public void setemail(String s){ this.email = s; }
+
     
     // DTO method
     public UserDto toDto() {

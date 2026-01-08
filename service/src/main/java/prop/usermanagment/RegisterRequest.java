@@ -2,11 +2,11 @@ package prop.usermanagment;
 
 
 public class RegisterRequest {
-    public String username;
-    public String password;
-    public String firstName;
-    public String lastName;
-    public String email;
+    private String username;
+    private String password;
+    private String firstName;
+    private String lastName;
+    private String email;
     
     // Getters and Setters
     public String getUsername() { return username; }
